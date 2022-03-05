@@ -1,4 +1,3 @@
-import copy
 import random
 # Consider using the modules imported above.
 
@@ -8,15 +7,22 @@ class Hat:
     print(self.contents)
     
   def draw(self, num):
-    	if num>=len(self.contents):
-    		return self.contents
-    	arr =[]
-    	for i in range(num):
-    	  rand_choice = random.choice(self.contents)
+      cpy_contents = self.contents.copy()
+      if num>=len(self.contents):
+    		 return self.contents
+      arr =[]
+      for i in range(num):
+    	  rand_choice = random.choice(cpy_contents)
     	  arr.append(rand_choice)
-    	  self.contents.remove(rand_choice)
+    	  cpy_contents.remove(rand_choice)
     	  
-    	return arr
+      return arr
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-	return 'todo'
+  for i in range(num_experiments):
+    draw = hat.draw(num_balls_drawn)
+    print(draw)
+    # make dict from draw and then see if mathces expected_balls
+    #if not same set flag to false
+  
+  return 'todo'
