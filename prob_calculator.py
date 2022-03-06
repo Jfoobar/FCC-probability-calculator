@@ -1,17 +1,15 @@
 import random
 import copy
 from collections import Counter
-# Consider using the modules imported above.
 
 class Hat:
   def __init__(self,**kwargs):
-    self.contents = [k for k,v in kwargs.items() for i in range(v)]
-    self.cpy_contents = self.contents[:]  
+    #make a list from dict argument
+    self.contents = [k for k,v in kwargs.items() for i in range(v)] 
     
   def draw(self, num):
     if num>len(self.contents):
-      #print(self.contents)
-      return self.cpy_contents
+      return self.contents
     arr =[]
     for i in range(num):
       rand_choice = random.choice(self.contents)
@@ -27,15 +25,10 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     draw_count = Counter(draw)
     expected = True
     for color in expected_balls:
-      try:
-        if expected_balls[color] > draw_count[color]:
-          #print(draw_count)
-          expected = False
-      except:
-        #print(draw_count)
+      if expected_balls[color] > draw_count[color]:
+        #less than expected
         expected = False
-        
+    #if all colors in draw are >= to the corresponding colors in expected_balls, add 1 to M  
     if expected:
       M +=1
-      #print(draw_count, draw_count[color])
   return M/num_experiments
